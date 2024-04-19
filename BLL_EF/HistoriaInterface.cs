@@ -1,8 +1,11 @@
 ﻿using BLL;
 using BLL.DTO;
 using DAL;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +25,18 @@ namespace BLL_EF
                 .Take(iloscNaStrone)
                 .Select(x => new HistoriaDTO(x))
                 .ToList();
+        }
+
+        public List<HistoriaDTO>? PobierzHistorieZeStronnicowaniemProcedura(int strona, int iloscNaStrone)
+        {
+            var paramStrona = new SqlParameter("@strona", strona);
+            var paramIloscNaStrone = new SqlParameter("@iloscnastrone", iloscNaStrone);
+
+            var historia = _context.Historia?
+                .FromSqlRaw("EXEC [PobierzHistorieZeStronnicowaniem] @strona, @iloscnastrone", paramStrona, paramIloscNaStrone)
+                .ToList();
+
+            return historia?.Select(x => new HistoriaDTO(x)).ToList();
         }
     }
 }

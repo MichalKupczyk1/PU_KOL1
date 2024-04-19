@@ -5,6 +5,7 @@ namespace BLL
     public interface IStudentInterface
     {
         public int? DodajStudenta(StudentDTO dto);
+        public int? DodajStudentaProcedura(StudentDTO dto);
         public List<StudentDTO> PobierzWszystkichStudentow();
         public StudentDTO PobierzStudenta(int? studentId);
         public bool UsunStudentaPoId(int? studentId);

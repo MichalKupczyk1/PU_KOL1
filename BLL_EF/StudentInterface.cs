@@ -1,7 +1,10 @@
 ﻿using BLL;
 using BLL.DTO;
 using DAL;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Models;
+using System.Data;
 
 namespace BLL_EF
 {
@@ -64,6 +67,19 @@ namespace BLL_EF
                 return student.Id;
             }
             return -1;
+        }
+
+        public int? DodajStudentaProcedura(StudentDTO dto)
+        {
+            var imie = new SqlParameter("@imie", dto.Imie);
+            var nazwisko = new SqlParameter("@nazwisko", dto.Nazwisko);
+            var grupaId = dto.GrupaId.HasValue ? new SqlParameter("@idGrupy", dto.GrupaId.Value) : new SqlParameter("@idGrupy", DBNull.Value);
+            var id = new SqlParameter("@nowyStudentId", SqlDbType.Int) { Direction = ParameterDirection.Output };
+
+            _context.Database.ExecuteSqlRaw("EXEC DodajStudenta @imie, @nazwisko, @idGrupy, @nowyStudentId OUTPUT",
+                                                imie, nazwisko, grupaId, id);
+
+            return (int)id.Value;
         }
 
         public StudentDTO PobierzStudenta(int? studentId)

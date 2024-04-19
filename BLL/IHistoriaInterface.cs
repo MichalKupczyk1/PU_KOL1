@@ -10,5 +10,6 @@ namespace BLL
     public interface IHistoriaInterface
     {
         public List<HistoriaDTO>? PobierzHistorieZeStronnicowaniem(int strona, int iloscNaStrone);
+        public List<HistoriaDTO>? PobierzHistorieZeStronnicowaniemProcedura(int strona, int iloscNaStrone);
     }
 }

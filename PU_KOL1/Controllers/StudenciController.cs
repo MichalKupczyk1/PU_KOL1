@@ -35,12 +35,23 @@ namespace PU_KOL1.Controllers
             return NotFound();
         }
 
-        [HttpPost]
+        [HttpPost("AddStudent")]
         public IActionResult AddStudent(StudentDTO student)
         {
             if (student != null)
             {
                 var id = _studentInterface.DodajStudenta(student);
+                return id > 0 ? Ok(id) : NotFound();
+            }
+            return NotFound();
+        }
+
+        [HttpPost("AddStudentProcedura")]
+        public IActionResult AddStudentProcedura(StudentDTO student)
+        {
+            if (student != null)
+            {
+                var id = _studentInterface.DodajStudentaProcedura(student);
                 return id > 0 ? Ok(id) : NotFound();
             }
             return NotFound();
@@ -72,6 +83,13 @@ namespace PU_KOL1.Controllers
         public IActionResult GetHistoria([FromQuery] int strona, [FromQuery] int iloscNaStrone)
         {
             var res = _historiaInterface.PobierzHistorieZeStronnicowaniem(strona, iloscNaStrone);
+            return res != null ? Ok(res) : NotFound();
+        }
+
+        [HttpGet("GetHistoriaProcedura")]
+        public IActionResult GetHistoriaProcedura([FromQuery] int strona, [FromQuery] int iloscNaStrone)
+        {
+            var res = _historiaInterface.PobierzHistorieZeStronnicowaniemProcedura(strona, iloscNaStrone);
             return res != null ? Ok(res) : NotFound();
         }
     }
