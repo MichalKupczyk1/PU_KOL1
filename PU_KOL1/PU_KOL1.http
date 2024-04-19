@@ -1,0 +1,6 @@
+@PU_KOL1_HostAddress = http://localhost:5202
+
+GET {{PU_KOL1_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
