@@ -1,6 +1,7 @@
 
 using BLL;
 using BLL_EF;
+using DAL;
 
 namespace PU_KOL1
 {
@@ -17,6 +18,7 @@ namespace PU_KOL1
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<IStudentInterface, StudentInterface>();
+            builder.Services.AddDbContext<UczelniaContext>();
 
             var app = builder.Build();
 

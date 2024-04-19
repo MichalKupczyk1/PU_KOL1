@@ -25,11 +25,44 @@ namespace PU_KOL1.Controllers
         }
 
         [HttpGet("GetStudenci")]
-        public IActionResult GetStudenci(int id)
+        public IActionResult GetStudenci()
         {
             var studenci = _studentInterface.PobierzWszystkichStudentow();
             if (studenci != null)
                 return Ok(studenci);
+            return NotFound();
+        }
+
+        [HttpPost]
+        public IActionResult AddStudent(StudentDTO student)
+        {
+            if (student != null)
+            {
+                var id = _studentInterface.DodajStudenta(student);
+                return id > 0 ? Ok(id) : NotFound();
+            }
+            return NotFound();
+        }
+
+        [HttpPut]
+        public IActionResult UpdateStudent(int id, StudentDTO student)
+        {
+            if (student != null)
+            {
+                _studentInterface.AktualizujStudenta(id, student);
+                return Ok();
+            }
+            return NotFound();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteStudent(int? id)
+        {
+            if (id.HasValue)
+            {
+                var res = _studentInterface.UsunStudentaPoId(id);
+                return res ? Ok(res) : NotFound();
+            }
             return NotFound();
         }
     }
