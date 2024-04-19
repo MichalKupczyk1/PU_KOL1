@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PU_KOL1.Models
+namespace Models
 {
     public class Grupa
     {
