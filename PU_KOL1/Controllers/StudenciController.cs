@@ -9,10 +9,12 @@ namespace PU_KOL1.Controllers
     public class StudenciController : ControllerBase
     {
         private readonly IStudentInterface _studentInterface;
+        private readonly IHistoriaInterface _historiaInterface;
 
-        public StudenciController(IStudentInterface studentInterface)
+        public StudenciController(IStudentInterface studentInterface, IHistoriaInterface historiaInterface)
         {
             _studentInterface = studentInterface;
+            _historiaInterface = historiaInterface;
         }
 
         [HttpGet("{id}")]
@@ -64,6 +66,13 @@ namespace PU_KOL1.Controllers
                 return res ? Ok(res) : NotFound();
             }
             return NotFound();
+        }
+
+        [HttpGet("GetHistoria")]
+        public IActionResult GetHistoria([FromQuery] int strona, [FromQuery] int iloscNaStrone)
+        {
+            var res = _historiaInterface.PobierzHistorieZeStronnicowaniem(strona, iloscNaStrone);
+            return res != null ? Ok(res) : NotFound();
         }
     }
 }

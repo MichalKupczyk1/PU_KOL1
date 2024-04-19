@@ -8,8 +8,8 @@ namespace Models
         public int Id { get; set; }
         public string? Imie { get; set; }
         public string? Nazwisko { get; set; }
-        public int? IdGrupy { get; set; }
-        public TypAkcji TypaAkcji { get; set; }
+        public int? GrupaId { get; set; }
+        public TypAkcji TypAkcji { get; set; }
         public DateTime Data { get; set; }
     }
 

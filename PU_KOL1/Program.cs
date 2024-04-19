@@ -18,6 +18,7 @@ namespace PU_KOL1
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<IStudentInterface, StudentInterface>();
+            builder.Services.AddScoped<IHistoriaInterface, HistoriaInterface>();
             builder.Services.AddDbContext<UczelniaContext>();
 
             var app = builder.Build();
